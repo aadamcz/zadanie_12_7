@@ -3,7 +3,7 @@ function Column(id, name) {
 
 	this.id = id;
 	this.name = name;
-	this.element = createColumn(); //to zostaje?
+	this.element = createColumn();
 
 	function createColumn() {
 		// TWORZENIE NOWYCH WĘZŁÓW
