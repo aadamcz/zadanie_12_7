@@ -23,6 +23,7 @@ function Column(id, name) {
 		columnAddCard.click(function(event) {
 			var cardName = prompt("Enter the name of the card");
 			event.preventDefault();
+
 			if (cardName === null) {
 				return;
 			} else if (cardName <= 0) {

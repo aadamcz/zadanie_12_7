@@ -17,7 +17,7 @@ $(".create-column").click(function() {
 			url: baseUrl + "/column",
 			method: "POST",
 			data: {
-				name: "columnName"
+				name: columnName
 			},
 			success: function(response) {
 				var column = new Column(response.id, columnName);
@@ -29,7 +29,7 @@ $(".create-column").click(function() {
 			url: baseUrl + "/column",
 			method: "POST",
 			data: {
-				name: "columnName"
+				name: columnName
 			},
 			success: function(response) {
 				var column = new Column(response.id, columnName);
