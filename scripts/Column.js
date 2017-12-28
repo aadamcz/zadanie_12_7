@@ -21,21 +21,38 @@ function Column(id, name) {
 		});
 
 		columnAddCard.click(function(event) {
-			var cardName = prompt('Enter the name of the card');
+			var cardName = prompt("Enter the name of the card");
 			event.preventDefault();
-			self.createCard(new Card(cardName));
-			$.ajax({
-				url: baseUrl + '/card',
-				method: 'POST',
-				data: {
-				name: cardName,
-				bootcamp_kanban_column_id: self.id	
-				},
-				success: function(response){
-					var card = new Card(response.id, cardName);
-					self.createCard(card);
-				}
-			});
+			if (cardName === null) {
+				return;
+			} else if (cardName <= 0) {
+				cardName = "NazwaKarty";
+				$.ajax({
+					url: baseUrl + "/card",
+					method: "POST",
+					data: {
+						name: cardName,
+						bootcamp_kanban_column_id: self.id
+					},
+					success: function(response) {
+						var card = new Card(response.id, cardName);
+						self.createCard(card);
+					}
+				});
+			} else if (cardName) {
+				$.ajax({
+					url: baseUrl + "/card",
+					method: "POST",
+					data: {
+						name: cardName,
+						bootcamp_kanban_column_id: self.id
+					},
+					success: function(response) {
+						var card = new Card(response.id, cardName);
+						self.createCard(card);
+					}
+				});
+			}
 		});
 
 		// KONSTRUOWANIE ELEMENTU KOLUMNY
@@ -47,6 +64,7 @@ function Column(id, name) {
 		return column;
 	}
 }
+
 Column.prototype = {
 	createCard: function(card) {
 		this.element.children("ul").append(card.element);
@@ -54,9 +72,9 @@ Column.prototype = {
 	deleteColumn: function() {
 		var self = this;
 		$.ajax({
-			url: baseUrl + '/column/' + self.id,
-			method: 'DELETE',
-			success: function(response){
+			url: baseUrl + "/column/" + self.id,
+			method: "DELETE",
+			success: function(response) {
 				self.element.remove();
 			}
 		});
