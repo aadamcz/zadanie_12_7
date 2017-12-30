@@ -11,20 +11,11 @@ $(".create-column").click(function() {
 	var columnName = prompt("Enter a column name");
 	if (columnName === null) {
 		return;
-	} else if (columnName <= 0) {
+	}
+	if (columnName === "") {
 		columnName = "NazwaKolumny";
-		$.ajax({
-			url: baseUrl + "/column",
-			method: "POST",
-			data: {
-				name: columnName
-			},
-			success: function(response) {
-				var column = new Column(response.id, columnName);
-				board.createColumn(column);
-			}
-		});
-	} else if (columnName) {
+	}
+	if (columnName) {
 		$.ajax({
 			url: baseUrl + "/column",
 			method: "POST",

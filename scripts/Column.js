@@ -26,21 +26,11 @@ function Column(id, name) {
 
 			if (cardName === null) {
 				return;
-			} else if (cardName <= 0) {
+			}
+			if (cardName === "") {
 				cardName = "NazwaKarty";
-				$.ajax({
-					url: baseUrl + "/card",
-					method: "POST",
-					data: {
-						name: cardName,
-						bootcamp_kanban_column_id: self.id
-					},
-					success: function(response) {
-						var card = new Card(response.id, cardName);
-						self.createCard(card);
-					}
-				});
-			} else if (cardName) {
+			}
+			if (cardName) {
 				$.ajax({
 					url: baseUrl + "/card",
 					method: "POST",
